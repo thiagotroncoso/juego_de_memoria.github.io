@@ -53,12 +53,13 @@ function create() {
 
   Phaser.Utils.Array.Shuffle(mazo);
 
-  const columnas = 4;
+  const columnas = (config.width < 600) ? 3 : 4;
   const filas = Math.ceil(mazo.length / columnas);
   const espacioX = config.width / (columnas + 1);
   const espacioY = config.height / (filas + 1);
 
-  const escala = (config.width < 500) ? 0.18 : 0.22;
+  const escala = (config.width < 400) ? 0.16 :
+                 (config.width < 600) ? 0.19 : 0.22;
 
   for (let i = 0; i < mazo.length; i++) {
     const x = espacioX * ((i % columnas) + 1);
