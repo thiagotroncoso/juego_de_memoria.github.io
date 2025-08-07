@@ -57,11 +57,13 @@ function create() {
 
   // Grilla adaptable según orientación
   const esVertical = config.height > config.width;
-  const columnas = esVertical ? 3 : 4;
+
+  // Ajustes para mejor distribución
+  const columnas = esVertical ? 4 : 5;
   const filas = Math.ceil(totalCartas / columnas);
 
   const margenX = 20;
-  const margenY = 100;
+  const margenY = 40;
 
   const espacioDisponibleX = config.width - margenX * 2;
   const espacioDisponibleY = config.height - margenY * 2;
@@ -69,7 +71,7 @@ function create() {
   const espacioX = espacioDisponibleX / columnas;
   const espacioY = espacioDisponibleY / filas;
 
-  const tamaño = Math.min(espacioX, espacioY) * 0.9;
+  const tamaño = Math.min(espacioX, espacioY * 0.8);
   const escala = tamaño / 300;
 
   for (let i = 0; i < totalCartas; i++) {
