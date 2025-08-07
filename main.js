@@ -53,11 +53,15 @@ function create() {
 
   Phaser.Utils.Array.Shuffle(mazo);
 
-  const columnas = (config.width < 600) ? 3 : 4;
-  const filas = Math.ceil(mazo.length / columnas);
+  const totalCartas = mazo.length;
+
+  // Grilla adaptable según orientación
+  const esVertical = config.height > config.width;
+  const columnas = esVertical ? 3 : 4;
+  const filas = Math.ceil(totalCartas / columnas);
 
   const margenX = 20;
-  const margenY = 80;
+  const margenY = 100;
 
   const espacioDisponibleX = config.width - margenX * 2;
   const espacioDisponibleY = config.height - margenY * 2;
@@ -68,7 +72,7 @@ function create() {
   const tamaño = Math.min(espacioX, espacioY) * 0.9;
   const escala = tamaño / 300;
 
-  for (let i = 0; i < mazo.length; i++) {
+  for (let i = 0; i < totalCartas; i++) {
     const col = i % columnas;
     const fila = Math.floor(i / columnas);
 
