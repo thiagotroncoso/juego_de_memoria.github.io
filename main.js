@@ -55,15 +55,25 @@ function create() {
 
   const columnas = (config.width < 600) ? 3 : 4;
   const filas = Math.ceil(mazo.length / columnas);
-  const espacioX = config.width / (columnas + 1);
-  const espacioY = config.height / (filas + 1);
 
-  const escala = (config.width < 400) ? 0.16 :
-                 (config.width < 600) ? 0.19 : 0.22;
+  const margenX = 20;
+  const margenY = 80;
+
+  const espacioDisponibleX = config.width - margenX * 2;
+  const espacioDisponibleY = config.height - margenY * 2;
+
+  const espacioX = espacioDisponibleX / columnas;
+  const espacioY = espacioDisponibleY / filas;
+
+  const tamaño = Math.min(espacioX, espacioY) * 0.9;
+  const escala = tamaño / 300;
 
   for (let i = 0; i < mazo.length; i++) {
-    const x = espacioX * ((i % columnas) + 1);
-    const y = espacioY * (Math.floor(i / columnas) + 1);
+    const col = i % columnas;
+    const fila = Math.floor(i / columnas);
+
+    const x = margenX + espacioX * col + espacioX / 2;
+    const y = margenY + espacioY * fila + espacioY / 2;
 
     const carta = this.add.image(x, y, 'back').setInteractive();
     carta.setScale(escala);
@@ -103,10 +113,32 @@ function manejarClick(carta) {
       canClick = true;
 
       if (cards.every(c => c.flipped)) {
-        this.time.delayedCall(1500, () => {
-          this.scene.restart();
+        this.time.delayedCall(700, () => {
+          mostrarVictoria(this);
         });
       }
     });
   }
+}
+
+function mostrarVictoria(scene) {
+  const texto = scene.add.text(config.width / 2, config.height / 2, '¡Ganaste!', {
+    fontFamily: 'Permanent Marker',
+    fontSize: '48px',
+    color: '#00ffff',
+    stroke: '#000000',
+    strokeThickness: 6
+  }).setOrigin(0.5).setAlpha(0).setScale(0.5);
+
+  scene.tweens.add({
+    targets: texto,
+    alpha: 1,
+    scale: 1,
+    duration: 1000,
+    ease: 'Bounce.easeOut'
+  });
+
+  scene.time.delayedCall(3000, () => {
+    scene.scene.restart();
+  });
 }
