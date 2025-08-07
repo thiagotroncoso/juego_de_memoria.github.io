@@ -20,16 +20,8 @@ let canClick = true;
 const nombresCartas = [
   'miloangel',
   'milochomba',
-  'Miloconbiza',
   'milocute',
-  'miloespaña',
-  'milofoton',
-  'miloganador',
-  'milolimon',
-  'milomatero',
-  'milopelin',
-  'Milorevista',
-  'miloserio'
+  'milomatero'
 ];
 
 function preload() {
@@ -53,28 +45,19 @@ function create() {
 
   Phaser.Utils.Array.Shuffle(mazo);
 
-  const totalCartas = mazo.length;
-
-  // Grilla adaptable según orientación
-  const esVertical = config.height > config.width;
-
-  // Ajustes para mejor distribución
-  const columnas = esVertical ? 4 : 5;
-  const filas = Math.ceil(totalCartas / columnas);
+  const columnas = 4;
+  const filas = 2;
 
   const margenX = 20;
   const margenY = 40;
 
-  const espacioDisponibleX = config.width - margenX * 2;
-  const espacioDisponibleY = config.height - margenY * 2;
-
-  const espacioX = espacioDisponibleX / columnas;
-  const espacioY = espacioDisponibleY / filas;
+  const espacioX = (config.width - margenX * 2) / columnas;
+  const espacioY = (config.height - margenY * 2) / filas;
 
   const tamaño = Math.min(espacioX, espacioY * 0.8);
   const escala = tamaño / 300;
 
-  for (let i = 0; i < totalCartas; i++) {
+  for (let i = 0; i < mazo.length; i++) {
     const col = i % columnas;
     const fila = Math.floor(i / columnas);
 
@@ -119,9 +102,7 @@ function manejarClick(carta) {
       canClick = true;
 
       if (cards.every(c => c.flipped)) {
-        this.time.delayedCall(700, () => {
-          mostrarVictoria(this);
-        });
+        this.time.delayedCall(700, () => mostrarVictoria(this));
       }
     });
   }
