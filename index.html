@@ -2,12 +2,14 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
   <title>MILO: Juego de Memoria</title>
   <script src="https://cdn.jsdelivr.net/npm/phaser@3/dist/phaser.min.js"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
     body {
       margin: 0;
       padding: 0;
@@ -18,13 +20,15 @@
       align-items: center;
       height: 100vh;
       overflow: hidden;
+      color: #00ffff;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
     h1 {
-      font-size: 1.8rem;
-      color: #00ffff;
-      text-shadow: 2px 2px 6px rgba(0, 255, 255, 0.5);
+      font-size: 2rem;
       margin: 10px 0;
       text-align: center;
+      text-shadow: 2px 2px 6px rgba(0, 255, 255, 0.5);
     }
     #game-container {
       width: 100%;
@@ -39,12 +43,21 @@
       height: auto;
       border-radius: 12px;
       box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+      background-color: #222;
+    }
+    /* Para pantallas muy pequeñas */
+    @media (max-width: 400px) {
+      h1 {
+        font-size: 1.5rem;
+      }
     }
   </style>
 </head>
 <body>
   <h1>MILO: Juego de Memoria</h1>
   <div id="game-container"></div>
+
+  <!-- Aquí debe estar tu archivo main.js, o puedes incluir el código JS directo -->
   <script src="main.js"></script>
 </body>
 </html>
