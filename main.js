@@ -48,7 +48,7 @@ function create() {
   const columnas = 4;
   const filas = 2;
 
-  const padding = 10; // espacio entre cartas
+  const padding = 60; // espacio entre cartas
   const totalWidth = config.width * 0.9;
   const totalHeight = config.height * 0.8;
 
