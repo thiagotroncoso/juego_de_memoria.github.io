@@ -257,5 +257,3 @@ function manejarClick(carta) {
     });
   }
 }
-
-
