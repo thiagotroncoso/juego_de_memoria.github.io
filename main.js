@@ -47,27 +47,10 @@ function create() {
   canClick = true;
   aciertos = 0;
   intentos = 5;
-// Texto de los Aciertos
-  const styleAciertos = { 
-    font: "48px Arial", 
-    fill: "#fff", 
-    backgroundColor: "rgba(0,0,0,0.5)", 
-    padding: { x: 15, y: 10 }, 
-  };
-  textoAciertos = this.add.text(20, 20, `Aciertos: ${aciertos}`, styleAciertos);
-  textoAciertos.setDepth(1); 
-  textoAciertos.setShadow(2, 2, "#000", 2, true, true);
-
-//Texto de los Intentos
-  const styleIntentos = { 
-    font: "48px Arial", 
-    fill: "#fff", 
-    backgroundColor: "rgba(0,0,0,0.5)", 
-    padding: { x: 15, y: 10 },
-  };
-  textoIntentos = this.add.text(350, 20, `Intentos: ${intentos}`, styleIntentos);
-  textoIntentos.setDepth(1); 
-  textoIntentos.setShadow(2, 2, "#000", 2, true, true);
+  txtIntentos =   document.getElementById("intentos").textContent
+  txtaciertos = document.getElementById("aciertos").textContent
+  document.getElementById("intentos").textContent = txtIntentos + intentos;
+  document.getElementById("aciertos").textContent = txtaciertos + aciertos;
 
   // Texto del temporizador
 const styleTiempo = { font: "48px Arial", fill: "#00ffff" };
@@ -210,14 +193,18 @@ function manejarClick(carta) {
         secondCard.disableInteractive();
 
         aciertos++;
-        textoAciertos.setText(`Aciertos: ${aciertos}`);
+       // textoAciertos.setText(`Aciertos: ${aciertos}`);
+        document.getElementById("aciertos").textContent ="aciertos: " + aciertos;
       } else {
         firstCard.setTexture('back');
         secondCard.setTexture('back');
         firstCard.flipped = false;
         secondCard.flipped = false;
         intentos--;
-        textoIntentos.setText(`intentos: ${intentos}`)
+       // textoIntentos.setText(`intentos: ${intentos}`)
+       // txtIntentos =   document.getElementById("intentos").textContent
+
+        document.getElementById("intentos").textContent ="intentos: " + intentos;
       }
 
   
